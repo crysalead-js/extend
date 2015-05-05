@@ -1,0 +1,15 @@
+{
+  "name": "extend-merge",
+  "version": "1.0.0",
+  "description": "Shallow extend and deep merge utility function.",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/crysalead-js/extend-merge.git"
+  },
+  "devDependencies": {
+    "jasmine": "^2.2.1"
+  },
+  "scripts": {
+    "test": "jasmine"
+  }
+}
