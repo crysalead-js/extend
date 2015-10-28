@@ -4,29 +4,29 @@ describe(".merge()", function() {
 
   it("merges objects", function() {
 
-    var a = { a: "foo" };
-    var b = { b: "bar" };
+    var a = { a: 'foo' };
+    var b = { b: 'bar' };
 
-    expect(merge({}, a, b)).toEqual({ a: "foo", b: "bar" });
+    expect(merge({}, a, b)).toEqual({ a: 'foo', b: 'bar' });
 
   });
 
   it("replaces former values", function() {
 
-    var a = { a: "foo" };
-    var b = { a: "bar" };
+    var a = { a: 'foo' };
+    var b = { a: 'bar' };
 
-    expect(merge({}, a, b)).toEqual({ a: "bar" });
+    expect(merge({}, a, b)).toEqual({ a: 'bar' });
 
   });
 
   it("supports `undefined`", function() {
 
     var a = { a: undefined };
-    var b = { b: "foo" };
+    var b = { b: 'foo' };
 
-    expect(merge({}, a, b)).toEqual({ a: undefined, b: "foo"  });
-    expect(merge({}, b, a)).toEqual({ a: undefined, b: "foo"  });
+    expect(merge({}, a, b)).toEqual({ a: undefined, b: 'foo'  });
+    expect(merge({}, b, a)).toEqual({ a: undefined, b: 'foo'  });
 
   });
 
@@ -42,12 +42,12 @@ describe(".merge()", function() {
 
   it("supports `null` argument", function() {
 
-    var a = { foo: "bar" };
+    var a = { foo: 'bar' };
     var b = null;
     var c = void 0;
 
-    expect(merge({}, a, b, c)).toEqual({ foo: "bar" });
-    expect(merge({}, b, a, c)).toEqual({ foo: "bar" });
+    expect(merge({}, a, b, c)).toEqual({ foo: 'bar' });
+    expect(merge({}, b, a, c)).toEqual({ foo: 'bar' });
 
   });
 
@@ -78,13 +78,13 @@ describe(".merge()", function() {
 
 
   it('replaces primitives with objects', function() {
-    var dst = { foo: "bloop" };
-    var src = { foo: { bar: { baz: "bloop" }}};
+    var dst = { foo: 'bloop' };
+    var src = { foo: { bar: { baz: 'bloop' }}};
     merge(dst, src);
     expect(dst).toEqual({
       foo: {
         bar: {
-          baz: "bloop"
+          baz: 'bloop'
         }
       }
     });
@@ -93,12 +93,12 @@ describe(".merge()", function() {
 
   it('replaces null values in destination with objects', function() {
     var dst = { foo: null };
-    var src = { foo: { bar: { baz: "bloop" }}};
+    var src = { foo: { bar: { baz: 'bloop' }}};
     merge(dst, src);
     expect(dst).toEqual({
       foo: {
         bar: {
-          baz: "bloop"
+          baz: 'bloop'
         }
       }
     });
@@ -132,7 +132,7 @@ describe(".merge()", function() {
 
   it("is mutable", function () {
 
-    var a = { foo: "bar" };
+    var a = { foo: 'bar' };
 
     merge(a, { foo: "baz" });
     expect(a.foo).toEqual("baz");
@@ -141,10 +141,10 @@ describe(".merge()", function() {
 
   it("is immutable with {} as target", function () {
 
-    var a = { foo: "bar" };
+    var a = { foo: 'bar' };
 
-    merge({}, a, { foo: "baz" });
-    expect(a.foo).toEqual("bar");
+    merge({}, a, { foo: 'baz' });
+    expect(a.foo).toEqual('bar');
 
   });
 
