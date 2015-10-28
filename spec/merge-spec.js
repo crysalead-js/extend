@@ -1,5 +1,7 @@
 var merge = require('..').merge;
 
+function Collection() {};
+
 describe(".merge()", function() {
 
   it("merges objects", function() {
@@ -58,7 +60,6 @@ describe(".merge()", function() {
     expect(merge(dst, src)).toBe(dst);
     expect(dst).toEqual([1, {name:"value"}]);
     expect(dst[1]).toEqual({name:"value"});
-    expect(dst[1]).not.toBe(src[1]);
 
   });
 
@@ -126,7 +127,6 @@ describe(".merge()", function() {
     expect(dst).toEqual({
       foo: [1,2,3]
     });
-    expect(dst.foo).not.toBe(src.foo);
 
   });
 
@@ -143,8 +143,17 @@ describe(".merge()", function() {
 
     var a = { foo: 'bar' };
 
-    merge({}, a, { foo: 'baz' });
+    merge({}, a, { foo: "baz" });
     expect(a.foo).toEqual('bar');
+
+  });
+
+  it("maintains constructors", function () {
+
+    var a = { foo: new Collection() };
+
+    var c = merge({}, a);
+    expect(c.foo instanceof Collection).toBe(true);
 
   });
 

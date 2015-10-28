@@ -27,10 +27,11 @@ function baseExtend(args, deep) {
       key = keys[j];
       src = obj[key];
       if (deep && src !== null && typeof src === 'object') {
-        if (target[key] === null || typeof target[key] !== 'object') {
-          target[key] = Array.isArray(src) ? [] : {};
+        if (target[key] !== null && typeof target[key] === 'object') {
+          baseExtend([target[key], src], true);
+        } else {
+          target[key] = src;
         }
-        baseExtend([target[key], src], true);
       } else {
         target[key] = src;
       }
