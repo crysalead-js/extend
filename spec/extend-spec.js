@@ -25,8 +25,8 @@ describe(".extend()", function() {
     var a = { a: undefined };
     var b = { b: 'foo' };
 
-    expect(extend({}, a, b)).toEqual({ a: undefined, b: 'foo'  });
-    expect(extend({}, b, a)).toEqual({ a: undefined, b: 'foo'  });
+    expect(extend({}, a, b)).toEqual({ b: 'foo' });
+    expect(extend({}, b, a)).toEqual({ b: 'foo' });
 
   });
 

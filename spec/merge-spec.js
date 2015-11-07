@@ -27,8 +27,8 @@ describe(".merge()", function() {
     var a = { a: undefined };
     var b = { b: 'foo' };
 
-    expect(merge({}, a, b)).toEqual({ a: undefined, b: 'foo'  });
-    expect(merge({}, b, a)).toEqual({ a: undefined, b: 'foo'  });
+    expect(merge({}, a, b)).toEqual({ b: 'foo' });
+    expect(merge({}, b, a)).toEqual({ b: 'foo' });
 
   });
 

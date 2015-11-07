@@ -29,10 +29,10 @@ function baseExtend(args, deep) {
       if (deep && src !== null && typeof src === 'object') {
         if (target[key] !== null && typeof target[key] === 'object') {
           baseExtend([target[key], src], true);
-        } else {
+        } else if (src !== undefined) {
           target[key] = src;
         }
-      } else {
+      } else if (src !== undefined) {
         target[key] = src;
       }
     }
