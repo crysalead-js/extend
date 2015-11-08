@@ -12,7 +12,7 @@ List of methods:
 
 **Arguments:**
 
-  * `target`  *Object* The target object to be extended.
+  * `target`  *Object* The target object.
   * `object1` *Object* The object that will extend the target.
   * `objectN` *Object* (optional) More objects.
 
@@ -29,7 +29,7 @@ extend({}, { a: "foo" }, { b: "bar" }));
 
 **Arguments:**
 
-  * `target`  *Object* The target object to receive merging.
+  * `target`  *Object* The target object.
   * `object1` *Object* The object that will be merged in target.
   * `objectN` *Object* (optional) More objects.
 
@@ -41,6 +41,18 @@ extend({}, { a: "foo" }, { b: "bar" }));
 merge({}, { a: { foo: "foo" } }, { a: { bar: "bar" } }));
 // => result: { a: { foo: "foo", bar: "bar" } }
 ```
+
+### blend(target, source1, source2, ...)
+
+**Arguments:**
+
+  * `target`  *Object* The target object.
+  * `object1` *Object* The object that will be merged in target.
+  * `objectN` *Object* (optional) More objects.
+
+**Return value:** The blended target object.
+
+Same behavior as `merge()` except that it also deeply merges non plain object.
 
 ## Acknowledgement
 

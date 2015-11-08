@@ -1,13 +1,16 @@
 var baseExtend = require("./base-extend");
 
 /**
- * Merges the object in the first argument in a deep way.
+ * Merges objects in a deep way.
  *
+ * Note: -- doesn't merge non plain object together --
  * Note: -- values ARE NOT cloned --
  *
- * @param  Object* ... A list of objects with target first (target, obj1, [obj2], ..., [objN]).
+ * @param  Object* ... A list of objects to merge (target, obj1, [obj2], ..., [objN]).
  * @return Object      The merged object.
  */
 module.exports = function() {
-  return baseExtend(arguments, true);
+  return baseExtend(arguments, true, function(value) {
+    return value != null && value.constructor === Object;
+  });
 }

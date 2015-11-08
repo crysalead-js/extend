@@ -1,15 +1,15 @@
-var merge = require('..').merge;
+var blend = require('..').blend;
 
 function Collection() {};
 
-describe(".merge()", function() {
+describe(".blend()", function() {
 
-  it("merges objects", function() {
+  it("blends objects", function() {
 
     var a = { a: 'foo' };
     var b = { b: 'bar' };
 
-    expect(merge({}, a, b)).toEqual({ a: 'foo', b: 'bar' });
+    expect(blend({}, a, b)).toEqual({ a: 'foo', b: 'bar' });
 
   });
 
@@ -18,7 +18,7 @@ describe(".merge()", function() {
     var a = { a: 'foo' };
     var b = { a: 'bar' };
 
-    expect(merge({}, a, b)).toEqual({ a: 'bar' });
+    expect(blend({}, a, b)).toEqual({ a: 'bar' });
 
   });
 
@@ -27,8 +27,8 @@ describe(".merge()", function() {
     var a = { a: undefined };
     var b = { b: 'foo' };
 
-    expect(merge({}, a, b)).toEqual({ b: 'foo' });
-    expect(merge({}, b, a)).toEqual({ b: 'foo' });
+    expect(blend({}, a, b)).toEqual({ b: 'foo' });
+    expect(blend({}, b, a)).toEqual({ b: 'foo' });
 
   });
 
@@ -37,8 +37,8 @@ describe(".merge()", function() {
     var a = { a: "default" };
     var b = { a: 0 };
 
-    expect(merge({}, a, b)).toEqual({ a: 0 });
-    expect(merge({}, b, a)).toEqual({ a: "default" });
+    expect(blend({}, a, b)).toEqual({ a: 0 });
+    expect(blend({}, b, a)).toEqual({ a: "default" });
 
   })
 
@@ -48,16 +48,16 @@ describe(".merge()", function() {
     var b = null;
     var c = void 0;
 
-    expect(merge({}, a, b, c)).toEqual({ foo: 'bar' });
-    expect(merge({}, b, a, c)).toEqual({ foo: 'bar' });
+    expect(blend({}, a, b, c)).toEqual({ foo: 'bar' });
+    expect(blend({}, b, a, c)).toEqual({ foo: 'bar' });
 
   });
 
-  it("merges an array into an existing array", function() {
+  it("blends an array into an existing array", function() {
 
     var src = [1, {name:"value"}];
     var dst = [{key:"v"}];
-    expect(merge(dst, src)).toBe(dst);
+    expect(blend(dst, src)).toBe(dst);
     expect(dst).toEqual([1, {name:"value"}]);
     expect(dst[1]).toEqual({name:"value"});
 
@@ -67,7 +67,7 @@ describe(".merge()", function() {
     var dst = { foo: { bar: 'foobar' }};
     var src1 = { foo: { bazz: 'foobazz' }};
     var src2 = { foo: { bozz: 'foobozz' }};
-    merge(dst, src1, src2);
+    blend(dst, src1, src2);
     expect(dst).toEqual({
       foo: {
         bar: 'foobar',
@@ -80,7 +80,7 @@ describe(".merge()", function() {
   it('replaces primitives with objects', function() {
     var dst = { foo: 'bloop' };
     var src = { foo: { bar: { baz: 'bloop' }}};
-    merge(dst, src);
+    blend(dst, src);
     expect(dst).toEqual({
       foo: {
         bar: {
@@ -93,7 +93,7 @@ describe(".merge()", function() {
   it('replaces null values in destination with objects', function() {
     var dst = { foo: null };
     var src = { foo: { bar: { baz: 'bloop' }}};
-    merge(dst, src);
+    blend(dst, src);
     expect(dst).toEqual({
       foo: {
         bar: {
@@ -108,19 +108,18 @@ describe(".merge()", function() {
     function fn() {}
     var dst = { foo: 1 };
     var src = { foo: fn };
-    merge(dst, src);
+    blend(dst, src);
     expect(dst).toEqual({
       foo: fn
     });
 
   });
 
-
   it('creates a new array if destination property is a non-object and source property is an array', function() {
 
     var dst = { foo: NaN };
     var src = { foo: [1,2,3] };
-    merge(dst, src);
+    blend(dst, src);
     expect(dst).toEqual({
       foo: [1,2,3]
     });
@@ -131,7 +130,7 @@ describe(".merge()", function() {
 
     var a = { foo: 'bar' };
 
-    merge(a, { foo: "baz" });
+    blend(a, { foo: "baz" });
     expect(a.foo).toEqual("baz");
 
   });
@@ -140,7 +139,7 @@ describe(".merge()", function() {
 
     var a = { foo: 'bar' };
 
-    merge({}, a, { foo: "baz" });
+    blend({}, a, { foo: "baz" });
     expect(a.foo).toEqual('bar');
 
   });
@@ -149,12 +148,12 @@ describe(".merge()", function() {
 
     var a = { foo: new Collection() };
 
-    var c = merge({}, a);
+    var c = blend({}, a);
     expect(c.foo instanceof Collection).toBe(true);
 
   });
 
-  it("doesn't blend non plain objects", function() {
+  it("blend objects", function() {
 
     function Item(config) {
       for (var i in config) {
@@ -169,10 +168,10 @@ describe(".merge()", function() {
     var src1 = { foo: { bar: elem1 } };
     var src2 = { foo: { bar: elem2 } };
 
-    merge(dst, src1, src2);
+    blend(dst, src1, src2);
     expect(dst).toEqual({
       foo: {
-        bar: new Item({ prop2: 'b' })
+        bar: new Item({ prop1: 'a', prop2: 'b' })
       }
     });
 
