@@ -1,6 +1,6 @@
 {
   "name": "extend-merge",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Shallow extend and deep merge utility function.",
   "license": "MIT",
   "repository": {
