@@ -115,7 +115,6 @@ describe(".merge()", function() {
 
   });
 
-
   it('creates a new array if destination property is a non-object and source property is an array', function() {
 
     var dst = { foo: NaN };
@@ -154,27 +153,22 @@ describe(".merge()", function() {
 
   });
 
-  it("doesn't blend non plain objects", function() {
-
-    function Item(config) {
-      for (var i in config) {
-        this[i] = config[i];
-      }
-    }
-
-    var elem1 = new Item({ prop1: 'a' });
-    var elem2 = new Item({ prop2: 'b' });
+  it("maintains immutability", function() {
 
     var dst = {};
-    var src1 = { foo: { bar: elem1 } };
-    var src2 = { foo: { bar: elem2 } };
+    var src1 = { foo: { bar: { prop1: 'a' }, baz: { prop3: 'c' } } };
+    var src2 = { foo: { bar: { prop2: 'b' } } };
 
     merge(dst, src1, src2);
     expect(dst).toEqual({
       foo: {
-        bar: new Item({ prop2: 'b' })
+        bar: { prop1: 'a', prop2: 'b' },
+        baz: { prop3: 'c' }
       }
     });
+
+    expect(src1).toEqual({ foo: { bar: { prop1: 'a' }, baz: { prop3: 'c' } } });
+    expect(src2).toEqual({ foo: { bar: { prop2: 'b' } } });
 
   });
 

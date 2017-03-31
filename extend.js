@@ -9,5 +9,5 @@ var baseExtend = require("./base-extend");
  * @return Object      The extended object.
  */
 module.exports = function() {
-  return baseExtend(arguments, false, function() {});
+  return baseExtend(arguments, false);
 }

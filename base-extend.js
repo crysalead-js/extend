@@ -3,12 +3,16 @@
  *
  * Note: -- values ARE NOT cloned --
  *
- * @param  Object*  ...       A list of objects with target first (target, obj1, [obj2], ..., [objN]).
- * @param  Boolean  deep      Indicates a shallow extend if `false` or a deep merge if `true`.
- * @param  Function mergeable Merging strategy.
- * @return Object             The extended/merged object.
+ * @param  Object*  ...    A list of objects with target first (target, obj1, [obj2], ..., [objN]).
+ * @param  Boolean  deep   Indicates a shallow extend if `false` or a deep merge if `true`.
+ * @return Object          The extended/merged object.
  */
-function baseExtend(args, deep, mergeable) {
+
+function clonable(value) {
+  return value != null && value.constructor === Object;
+}
+
+function baseExtend(args, merge) {
   var i, j, obj, src, key, keys, len;
   var target = args[0];
   var length = args.length;
@@ -27,11 +31,11 @@ function baseExtend(args, deep, mergeable) {
       key = keys[j];
       src = obj[key];
 
-      if (deep && mergeable(src)) {
-        if (mergeable(target[key])) {
-          baseExtend([target[key], src], true, mergeable);
+      if (clonable(src)) {
+        if (merge && clonable(target[key])) {
+          baseExtend([target[key], src], merge);
         } else if (src !== undefined) {
-          target[key] = src;
+          target[key] = baseExtend([{}, src], merge);
         }
       } else if (src !== undefined) {
         target[key] = src;

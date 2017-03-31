@@ -10,7 +10,5 @@ var baseExtend = require("./base-extend");
  * @return Object      The merged object.
  */
 module.exports = function() {
-  return baseExtend(arguments, true, function(value) {
-    return value != null && value.constructor === Object;
-  });
+  return baseExtend(arguments, true);
 }
