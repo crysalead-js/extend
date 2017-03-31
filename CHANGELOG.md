@@ -2,6 +2,10 @@
 
 ## HEAD
 
+## 1.0.4 (2017-04-01)
+
+  * **BC Break:** remove `bend()` and make `extend()` & `merge()` immutable on plain objects.  
+
 ## 1.0.3 (2015-11-08)
 
   * **BC Break:** `merge()` doesn't merges non plain object anymore, use `blend()` instead.
