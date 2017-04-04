@@ -13,6 +13,15 @@ describe(".merge()", function() {
 
   });
 
+  it("merges objects with arrays", function() {
+
+    var a = { a: 'foo' };
+    var b = { b: ['bar'] };
+
+    expect(merge({}, a, b)).toEqual({ a: 'foo', b: ['bar'] });
+
+  });
+
   it("replaces former values", function() {
 
     var a = { a: 'foo' };
@@ -141,6 +150,17 @@ describe(".merge()", function() {
 
     merge({}, a, { foo: "baz" });
     expect(a.foo).toEqual('bar');
+
+  });
+
+  it("is immutable on arrays", function() {
+
+    var a = { a: 'foo' };
+    var b = { b: ['bar'] };
+
+    var result = merge({}, a, b);
+    expect(result.b).toEqual(['bar']);
+    expect(result.b).not.toBe(b.b);
 
   });
 

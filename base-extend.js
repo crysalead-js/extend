@@ -38,7 +38,7 @@ function baseExtend(args, merge) {
           target[key] = baseExtend([{}, src], merge);
         }
       } else if (src !== undefined) {
-        target[key] = src;
+        target[key] = Array.isArray(src) ? src.slice() : src;
       }
     }
   }

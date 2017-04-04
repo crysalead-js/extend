@@ -13,6 +13,15 @@ describe(".extend()", function() {
 
   });
 
+  it("extends objects with arrays", function() {
+
+    var a = { a: 'foo' };
+    var b = { b: ['bar'] };
+
+    expect(extend({}, a, b)).toEqual({ a: 'foo', b: ['bar'] });
+
+  });
+
   it("replaces former values", function() {
 
     var a = { a: 'foo' };
@@ -137,6 +146,17 @@ describe(".extend()", function() {
 
     extend({}, a, { foo: 'baz' });
     expect(a.foo).toEqual('bar');
+
+  });
+
+  it("is immutable on arrays", function() {
+
+    var a = { a: 'foo' };
+    var b = { b: ['bar'] };
+
+    var result = extend({}, a, b);
+    expect(result.b).toEqual(['bar']);
+    expect(result.b).not.toBe(b.b);
 
   });
 
