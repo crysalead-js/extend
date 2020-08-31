@@ -13,7 +13,7 @@ function clonable(value) {
 }
 
 function baseExtend(args, merge) {
-  var i, j, obj, src, key, keys, len;
+  var i, obj, src, key;
   var target = args[0];
   var length = args.length;
 
@@ -24,12 +24,11 @@ function baseExtend(args, merge) {
       continue;
     }
 
-    keys = Object.keys(obj);
-    len = keys.length;
-
-    for (j = 0; j < len; j++) {
-      key = keys[j];
+    for (key in obj) {
       src = obj[key];
+      if ((key === 'constructor' && typeof src === 'function') || key === '__proto__') {
+        continue;
+      }
 
       if (clonable(src)) {
         if (merge && clonable(target[key])) {

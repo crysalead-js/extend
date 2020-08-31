@@ -192,4 +192,20 @@ describe(".merge()", function() {
 
   });
 
+  it("ignores constructors", function () {
+
+    var a = JSON.parse('{"constructor": {"__proto__":{"polluted":"yes"}}}');
+    var c = merge({}, a);
+    expect({}.polluted).toBe(undefined);
+
+  });
+
+  it("ignores __proto__", function () {
+
+    var a = JSON.parse('{"__proto__":{"polluted":"yes"}}');
+    var c = merge({}, a);
+    expect({}.polluted).toBe(undefined);
+
+  });
+
 });
